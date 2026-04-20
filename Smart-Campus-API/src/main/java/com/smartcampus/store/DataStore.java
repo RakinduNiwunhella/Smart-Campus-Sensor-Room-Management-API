@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DataStore {
 
-    // ── Volatile + double-checked locking for safe lazy initialisation ──────────
+    //  Volatile + double-checked locking for safe lazy initialisation 
     private static volatile DataStore instance;
 
     private final Map<String, Room>               rooms          = new ConcurrentHashMap<>();
@@ -42,7 +42,7 @@ public class DataStore {
         return instance;
     }
 
-    // ── Accessors ────────────────────────────────────────────────────────────────
+    // Accessors 
 
     public Map<String, Room> getRooms() {
         return rooms;
@@ -56,7 +56,7 @@ public class DataStore {
         return sensorReadings;
     }
 
-    // ── Seed data ────────────────────────────────────────────────────────────────
+    // Seed data
 
     private void seedData() {
         // Rooms

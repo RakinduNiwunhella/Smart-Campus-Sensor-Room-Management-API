@@ -2,14 +2,14 @@ package com.smartcampus.model;
 
 import java.util.UUID;
 
-/**
- * Represents a single timestamped reading captured by a sensor.
- */
+
+// Represents a single timestamped reading captured by a sensor.
+
 public class SensorReading {
 
-    private String id;        // UUID of this reading event
-    private long timestamp;   // epoch milliseconds when the reading was captured
-    private double value;     // the actual metric value recorded
+    private String id; // UUID of this reading event
+    private long timestamp; // epoch milliseconds when the reading was captured
+    private double value; // the actual metric value recorded
 
     public SensorReading() {}
 

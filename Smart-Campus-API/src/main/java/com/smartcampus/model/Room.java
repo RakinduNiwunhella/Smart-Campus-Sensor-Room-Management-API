@@ -3,14 +3,15 @@ package com.smartcampus.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents a physical room on campus.
- */
+
+//  Represents a physical room on the campus.
+ 
 public class Room {
 
-    private String id;       // e.g. "LIB-301"
-    private String name;     // e.g. "Library Quiet Study"
-    private int capacity;    // maximum occupancy
+    private String id;// e.g.: "LIB-301"
+    private String name;// e.g.: "Library Quiet Study"
+    private int capacity;// maximum occupancy
+   
     private List<String> sensorIds = new ArrayList<>(); // IDs of sensors in this room
 
     public Room() {}

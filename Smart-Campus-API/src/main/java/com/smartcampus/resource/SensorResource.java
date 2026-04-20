@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 /**
  * Part 3 – Sensor Operations.
  *
- * GET  /api/v1/sensors              – list all sensors (optional ?type= filter)
- * POST /api/v1/sensors              – register a new sensor (validates roomId)
- * GET  /api/v1/sensors/{sensorId}   – get one sensor
+ * GET  /api/v1/sensors – list all sensors (optional ?type= filter)
+ * POST /api/v1/sensors – register a new sensor (validates roomId)
+ * GET  /api/v1/sensors/{sensorId} – get one sensor
  *
  * Part 4 – Sub-Resource Locator
  * ANY  /api/v1/sensors/{sensorId}/readings  → delegates to SensorReadingResource
@@ -29,7 +29,7 @@ public class SensorResource {
 
     private final DataStore store = DataStore.getInstance();
 
-    // ── GET /sensors[?type=xxx] ───────────────────────────────────────────────────
+    // GET /sensors[?type=xxx] 
     @GET
     public Response getAllSensors(@QueryParam("type") String type) {
         List<Sensor> list = new ArrayList<>(store.getSensors().values());
@@ -41,7 +41,7 @@ public class SensorResource {
         return Response.ok(list).build();
     }
 
-    // ── POST /sensors ─────────────────────────────────────────────────────────────
+    //  POST /sensors 
     /**
      * Registers a new sensor.
      * Business rule: the roomId in the request body must reference an existing room.
@@ -78,7 +78,7 @@ public class SensorResource {
         return Response.status(Response.Status.CREATED).entity(sensor).build();
     }
 
-    // ── GET /sensors/{sensorId} ───────────────────────────────────────────────────
+    // GET /sensors/{sensorId}
     @GET
     @Path("/{sensorId}")
     public Response getSensorById(@PathParam("sensorId") String sensorId) {
@@ -92,7 +92,7 @@ public class SensorResource {
         return Response.ok(sensor).build();
     }
 
-    // ── Sub-Resource Locator: /sensors/{sensorId}/readings ───────────────────────
+    // Sub-Resource Locator: /sensors/{sensorId}/readings
     /**
      * No HTTP-method annotation → this is a sub-resource locator.
      * JAX-RS delegates all requests under {sensorId}/readings to the

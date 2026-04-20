@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Part 2 – Room Management.
- *
- * GET    /api/v1/rooms            – list all rooms
- * POST   /api/v1/rooms            – create a room
- * GET    /api/v1/rooms/{roomId}   – get one room
- * DELETE /api/v1/rooms/{roomId}   – delete a room (blocked if sensors are still assigned)
+ * Part 2 – Room Management
+ * 
+ * GET    /api/v1/rooms            - list all rooms
+ * POST   /api/v1/rooms            - create a room
+ * GET    /api/v1/rooms/{roomId}   - get one room
+ * DELETE /api/v1/rooms/{roomId}   - delete a room (blocked if sensors are still assigned)
  */
 @Path("/rooms")
 @Produces(MediaType.APPLICATION_JSON)
@@ -26,14 +26,14 @@ public class RoomResource {
 
     private final DataStore store = DataStore.getInstance();
 
-    // ── GET /rooms ────────────────────────────────────────────────────────────────
+    // GET /rooms
     @GET
     public Response getAllRooms() {
         List<Room> roomList = new ArrayList<>(store.getRooms().values());
         return Response.ok(roomList).build();
     }
 
-    // ── POST /rooms ───────────────────────────────────────────────────────────────
+    // POST /rooms
     @POST
     public Response createRoom(Room room) {
         if (room == null || room.getId() == null || room.getId().trim().isEmpty()) {
@@ -55,7 +55,7 @@ public class RoomResource {
         return Response.status(Response.Status.CREATED).entity(room).build();
     }
 
-    // ── GET /rooms/{roomId} ───────────────────────────────────────────────────────
+    // GET /rooms/{roomId}
     @GET
     @Path("/{roomId}")
     public Response getRoomById(@PathParam("roomId") String roomId) {
@@ -69,7 +69,7 @@ public class RoomResource {
         return Response.ok(room).build();
     }
 
-    // ── DELETE /rooms/{roomId} ────────────────────────────────────────────────────
+    // DELETE /rooms/{roomId} 
     /**
      * Idempotency note: first call on an existing, empty room returns 204.
      * A second call (room already gone) returns 404 – the resource state is

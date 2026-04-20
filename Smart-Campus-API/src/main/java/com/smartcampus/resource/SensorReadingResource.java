@@ -19,8 +19,8 @@ import java.util.UUID;
  * sub-resource locator in SensorResource. The sensorId context is injected
  * via the constructor.
  *
- * GET  /api/v1/sensors/{sensorId}/readings   – retrieve full reading history
- * POST /api/v1/sensors/{sensorId}/readings   – append a new reading
+ * GET  /api/v1/sensors/{sensorId}/readings – retrieve full reading history
+ * POST /api/v1/sensors/{sensorId}/readings – append a new reading
  *      Side-effect: updates currentValue on the parent Sensor object.
  */
 @Produces(MediaType.APPLICATION_JSON)
@@ -34,7 +34,7 @@ public class SensorReadingResource {
         this.sensorId = sensorId;
     }
 
-    // ── GET /readings ─────────────────────────────────────────────────────────────
+    // GET /readings 
     @GET
     public Response getReadings() {
         List<SensorReading> readings = store.getSensorReadings()
@@ -42,12 +42,12 @@ public class SensorReadingResource {
         return Response.ok(readings).build();
     }
 
-    // ── POST /readings ────────────────────────────────────────────────────────────
+    //  POST /readings 
     /**
      * Appends a new reading for this sensor.
      *
      * State constraint: sensors in MAINTENANCE or OFFLINE status cannot receive
-     * new readings → SensorUnavailableException → HTTP 403 Forbidden.
+     * new readings - SensorUnavailableException - HTTP 403 Forbidden.
      *
      * Side-effect: the sensor's currentValue is updated to reflect the new reading.
      */
