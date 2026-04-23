@@ -11,9 +11,8 @@
 
 ---
 
-## Video Demonstration
+## Video Demonstration & Conceptual Report
 
-Watch a live demo of the Smart Campus API in action:
 
 [**View Video Demonstration**](https://drive.google.com/file/d/1D9lHClrjjM8IJwgYh9VrNGUKvXt6EXL6/view?usp=share_link)
 
