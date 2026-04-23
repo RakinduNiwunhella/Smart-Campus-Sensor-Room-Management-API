@@ -1,10 +1,108 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Smart Campus API</title>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(to right, #1e3c72, #2a5298);
+                color: white;
+                text-align: center;
+                padding: 50px;
+            }
+
+            .container {
+                background: rgba(0, 0, 0, 0.5);
+                padding: 30px;
+                border-radius: 12px;
+                width: 60%;
+                margin: auto;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            }
+
+            h1 {
+                margin-bottom: 10px;
+            }
+
+            h2 {
+                margin-top: 0;
+                font-weight: normal;
+                color: #ddd;
+            }
+
+            .info {
+                margin-top: 20px;
+                font-size: 18px;
+                line-height: 1.6;
+            }
+            h3 {
+                margin-top: 25px;
+                color: #ffffff;
+            }
+
+            .endpoints {
+                margin: 15px auto 0;
+                text-align: left;
+                display: table;
+                font-size: 15px;
+            }
+
+            .endpoint {
+                margin: 6px 0;
+                font-family: monospace;
+                display: flex;
+                align-items: baseline;
+                gap: 14px;
+            }
+
+            .method {
+                font-weight: bold;
+                min-width: 80px;
+                color: #00ffcc;
+                text-align: left;
+                letter-spacing: 0.4px;
+            }
+
+            .path {
+                white-space: nowrap;
+            }
+
+            footer {
+                margin-top: 30px;
+                font-size: 14px;
+                color: #bbb;
+            }
+        </style>
     </head>
+
     <body>
-        <h1>Hello World!</h1>
+        <div class="container">
+            <h1>Smart Campus API</h1>
+            <h2>Coursework Project</h2>
+
+            <div class="info">
+                <p><strong>Name:</strong> Rakindu Niwunhella</p>
+                <p><strong>UOW ID:</strong> w2119870</p>
+                <p><strong>IIT ID:</strong> 20240426</p>
+                <p><strong>Module:</strong> 5COSC022W.2 Client-Server Architectures</p>
+            </div>
+            <div class="info">
+                <h3>Available API Endpoints</h3>
+                <div class="endpoints">
+                    <div class="endpoint"><span class="method">GET</span><span class="path">/smart-campus-api/api/v1</span></div>
+                    <div class="endpoint"><span class="method">GET</span><span class="path">/smart-campus-api/api/v1/rooms</span></div>
+                    <div class="endpoint"><span class="method">POST</span><span class="path">/smart-campus-api/api/v1/rooms</span></div>
+                    <div class="endpoint"><span class="method">GET</span><span class="path">/smart-campus-api/api/v1/sensors?type=Temperature</span></div>
+                    <div class="endpoint"><span class="method">GET</span><span class="path">/smart-campus-api/api/v1/sensors/{sensorId}</span></div>
+                    <div class="endpoint"><span class="method">POST</span><span class="path">/smart-campus-api/api/v1/sensors/{sensorId}/readings</span></div>
+                </div>
+            </div>
+
+            <footer>
+                <p>RESTful Web Service built using JAX-RS</p>
+                <p>Running on Apache Tomcat</p>
+            </footer>
+        </div>
     </body>
 </html>
