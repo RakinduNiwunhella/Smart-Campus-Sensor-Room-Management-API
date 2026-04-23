@@ -153,7 +153,7 @@ smart-campus-api/
 Open your browser or an API client (e.g. Postman) and navigate to:
 
 ```
-http://localhost:8080/smart-campus-api/api/v1
+http://localhost:8080/Smart-Campus-API/api/v1
 ```
 
 Expected response:
@@ -176,24 +176,24 @@ Expected response:
 
 ## 4. Sample curl Commands
 
-All commands assume the server is running at `http://localhost:8080/smart-campus-api`. The API ships with seed data so every GET command works immediately after startup.
+All commands assume the server is running at `http://localhost:8080/Smart-Campus-API`. The API ships with seed data so every GET command works immediately after startup.
 
 ### 1. Discover the API root
 
 ```bash
-curl -X GET http://localhost:8080/smart-campus-api/api/v1
+curl -X GET http://localhost:8080/Smart-Campus-API/api/v1
 ```
 
 ### 2. List all rooms
 
 ```bash
-curl -X GET http://localhost:8080/smart-campus-api/api/v1/rooms
+curl -X GET http://localhost:8080/Smart-Campus-API/api/v1/rooms
 ```
 
 ### 3. Create a new room
 
 ```bash
-curl -X POST http://localhost:8080/smart-campus-api/api/v1/rooms \
+curl -X POST http://localhost:8080/Smart-Campus-API/api/v1/rooms \
   -H "Content-Type: application/json" \
   -d '{"id": "HALL-02", "name": "Seminar Room B", "capacity": 40}'
 ```
@@ -201,7 +201,7 @@ curl -X POST http://localhost:8080/smart-campus-api/api/v1/rooms \
 ### 4. Register a new sensor in an existing room
 
 ```bash
-curl -X POST http://localhost:8080/smart-campus-api/api/v1/sensors \
+curl -X POST http://localhost:8080/Smart-Campus-API/api/v1/sensors \
   -H "Content-Type: application/json" \
   -d '{"id": "TEMP-002", "type": "Temperature", "status": "ACTIVE", "currentValue": 21.0, "roomId": "HALL-01"}'
 ```
@@ -209,13 +209,13 @@ curl -X POST http://localhost:8080/smart-campus-api/api/v1/sensors \
 ### 5. Filter sensors by type
 
 ```bash
-curl -X GET "http://localhost:8080/smart-campus-api/api/v1/sensors?type=Temperature"
+curl -X GET "http://localhost:8080/Smart-Campus-API/api/v1/sensors?type=Temperature"
 ```
 
 ### 6. Post a new reading for a sensor
 
 ```bash
-curl -X POST http://localhost:8080/smart-campus-api/api/v1/sensors/TEMP-001/readings \
+curl -X POST http://localhost:8080/Smart-Campus-API/api/v1/sensors/TEMP-001/readings \
   -H "Content-Type: application/json" \
   -d '{"value": 24.7}'
 ```
@@ -223,26 +223,26 @@ curl -X POST http://localhost:8080/smart-campus-api/api/v1/sensors/TEMP-001/read
 ### 7. Retrieve reading history for a sensor
 
 ```bash
-curl -X GET http://localhost:8080/smart-campus-api/api/v1/sensors/TEMP-001/readings
+curl -X GET http://localhost:8080/Smart-Campus-API/api/v1/sensors/TEMP-001/readings
 ```
 
 ### 8. Delete a room with no sensors
 
 ```bash
-curl -X DELETE http://localhost:8080/smart-campus-api/api/v1/rooms/HALL-01
+curl -X DELETE http://localhost:8080/Smart-Campus-API/api/v1/rooms/HALL-01
 ```
 
 ### 9. Attempt to delete a room that has sensors (expect 409 Conflict)
 
 ```bash
-curl -X DELETE http://localhost:8080/smart-campus-api/api/v1/rooms/LIB-301
+curl -X DELETE http://localhost:8080/Smart-Campus-API/api/v1/rooms/LIB-301
 ```
 
 ---
 
 ## 5. API Reference
 
-All endpoints consume and produce `application/json`. Base URL: `http://localhost:8080/smart-campus-api/api/v1`
+All endpoints consume and produce `application/json`. Base URL: `http://localhost:8080/Smart-Campus-API/api/v1`
 
 ### 5.1 Discovery
 
