@@ -16,7 +16,7 @@
 
 [**View Video Demonstration**](https://drive.google.com/file/d/1D9lHClrjjM8IJwgYh9VrNGUKvXt6EXL6/view?usp=share_link)
 
-[**Conceptual Report**](https://drive.google.com/file/d/1mFo_5zhxM10iCarmh1_nfRjUDYKAVscC/view?usp=share_link)
+[**Conceptual Report**](https://drive.google.com/file/d/1iankGa-ETYkuT3tGBqpqYka6bIG6B2db/view?usp=sharing)
 
 ---
 
