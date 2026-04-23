@@ -11,6 +11,16 @@
 
 ---
 
+## Video Demonstration
+
+Watch a live demo of the Smart Campus API in action:
+
+[**View Video Demonstration**](https://drive.google.com/file/d/1D9lHClrjjM8IJwgYh9VrNGUKvXt6EXL6/view?usp=share_link)
+
+[**Conceptual Report**](https://drive.google.com/file/d/1mFo_5zhxM10iCarmh1_nfRjUDYKAVscC/view?usp=share_link)
+
+---
+
 ## API Design Overview
 
 The Smart Campus API is a **resource-oriented RESTful web service** built with JAX-RS (Jersey 2.41) that models the physical structure of a university campus as a hierarchy of HTTP resources.
