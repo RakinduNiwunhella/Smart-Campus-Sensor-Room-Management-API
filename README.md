@@ -1,7 +1,7 @@
-# Smart Campus — Sensor & Room Management API
+# Smart Campus - Sensor & Room Management API
 
 **Module:** 5COSC022W Client-Server Architectures (2025/26)  
-**University of Westminster — School of Computer Science and Engineering**
+**University of Westminster - - School of Computer Science and Engineering**
 
 | | |
 |---|---|
@@ -39,7 +39,7 @@ The Smart Campus API is a **resource-oriented RESTful web service** built with J
 - **Versioned base path** (**/api/v1**) allows future non-breaking evolution of the API
 - **HATEOAS discovery endpoint** at the root so clients never hardcode resource URLs
 - **Sub-resource locator pattern** delegates reading history to a dedicated **SensorReadingResource** class, keeping resource classes single-responsibility
-- **Centralised exception mappers** (**@Provider**) translate every business exception into a consistent **{status, error, message}** JSON body — no raw stack traces ever reach the client
+- **Centralised exception mappers** (**@Provider**) translate every business exception into a consistent **{status, error, message}** JSON body - no raw stack traces ever reach the client
 - **Thread-safe singleton **DataStore**** using **ConcurrentHashMap** and double-checked locking, necessary because JAX-RS creates a new resource instance per request
 - **Referential integrity** enforced at write time: a sensor cannot be created without a valid **roomId**, and a room cannot be deleted while sensors are assigned to it
 
@@ -133,7 +133,7 @@ smart-campus-api/
 
 1. Go to **File → Open Project**
 2. Navigate to the **smart-campus-api** folder and select it
-3. NetBeans detects it as a Maven project — click **Open Project**
+3. NetBeans detects it as a Maven project - click **Open Project**
 4. Wait for NetBeans to resolve dependencies (progress shown in the bottom bar)
 
 ### 3. Set the Server
@@ -268,7 +268,7 @@ All endpoints consume and produce **application/json**. Base URL: **http://local
 | **GET** | **/api/v1/rooms/{roomId}** | Get a specific room by ID | **200 OK** |
 | **DELETE** | **/api/v1/rooms/{roomId}** | Delete a room (blocked if sensors are assigned) | **204 No Content** |
 
-**POST /rooms — Request Body**
+**POST /rooms - Request Body**
 
 ```json
 {
@@ -296,7 +296,7 @@ All endpoints consume and produce **application/json**. Base URL: **http://local
 | **POST** | **/api/v1/sensors** | Register a new sensor | **201 Created** |
 | **GET** | **/api/v1/sensors/{sensorId}** | Get a specific sensor by ID | **200 OK** |
 
-**POST /sensors — Request Body**
+**POST /sensors - Request Body**
 
 ```json
 {
@@ -325,7 +325,7 @@ All endpoints consume and produce **application/json**. Base URL: **http://local
 | **GET** | **/api/v1/sensors/{sensorId}/readings** | Retrieve full reading history | **200 OK** |
 | **POST** | **/api/v1/sensors/{sensorId}/readings** | Append a new reading | **201 Created** |
 
-**POST /readings — Request Body**
+**POST /readings - Request Body**
 
 ```json
 {
@@ -365,7 +365,7 @@ All endpoints consume and produce **application/json**. Base URL: **http://local
 | **type** | **String** | No | **Temperature**, **CO2**, **Occupancy**, etc. |
 | **status** | **String** | No | **ACTIVE** / **MAINTENANCE** / **OFFLINE** (default: **ACTIVE**) |
 | **currentValue** | **double** | No | Most recent measurement |
-| **roomId** | **String** | Yes | Foreign key — must reference an existing Room |
+| **roomId** | **String** | Yes | Foreign key - must reference an existing Room |
 
 ### SensorReading
 
@@ -406,7 +406,7 @@ Raw Java stack traces are **never** returned in HTTP responses. All exceptions a
 
 #### Q1.1 – JAX-RS Resource Lifecycle & In-Memory Data Management
 
-By default, JAX-RS creates a new instance of every resource class for each incoming HTTP request (per-request lifecycle). This is the specification-mandated default and means resource classes are not shared between requests — they are instantiated, used to serve the request, then discarded.
+By default, JAX-RS creates a new instance of every resource class for each incoming HTTP request (per-request lifecycle). This is the specification-mandated default and means resource classes are not shared between requests - they are instantiated, used to serve the request, then discarded.
 
 Each request gets a new resource instance, so instance variables don't persist between requests. Therefore, shared data (like rooms/sensors) must be stored in a singleton. A thread-safe singleton **DataStore** with **ConcurrentHashMap** is used to safely handle concurrent access. Using a regular **HashMap** could cause race conditions, data loss, or runtime errors in a multi-threaded environment.
 
@@ -442,12 +442,12 @@ The DELETE operation is idempotent in this implementation, in line with the HTTP
 
 In this implementation:
 
-- **First DELETE on an existing, empty room** — the room is removed from the store and **204 No Content** is returned.
-- **Second DELETE on the same room ID** — the room no longer exists, so **404 Not Found** is returned.
+- **First DELETE on an existing, empty room** - the room is removed from the store and **204 No Content** is returned.
+- **Second DELETE on the same room ID** - the room no longer exists, so **404 Not Found** is returned.
 
 Strictly speaking, the HTTP response code differs between the first and second call, but the resource state is identical after both: the room is absent. The HTTP specification (RFC 9110) defines idempotency in terms of side effects on the server state, not in terms of the response status code. Therefore, DELETE is correctly considered idempotent here.
 
-The one scenario that breaks safety is attempting to DELETE a room that still has sensors — this throws a **RoomNotEmptyException** and returns **409 Conflict** every time until the sensors are removed, which is consistent and correct.
+The one scenario that breaks safety is attempting to DELETE a room that still has sensors - this throws a **RoomNotEmptyException** and returns **409 Conflict** every time until the sensors are removed, which is consistent and correct.
 
 ---
 
@@ -459,7 +459,7 @@ The **@Consumes(MediaType.APPLICATION_JSON)** annotation tells the JAX-RS runtim
 
 If a client sends a request with an unsupported content type such as **text/plain** or **application/xml**, the JAX-RS runtime first examines the **Content-Type** header before dispatching the request to any resource method. If it cannot find a method whose **@Consumes** annotation matches the incoming content type, it immediately returns an HTTP **415 Unsupported Media Type** response without invoking any application code.
 
-This means the resource method body is never executed — no partial parsing, no null entity objects, no risk of data corruption. The annotation acts as a first-line contract enforcement at the framework level, making the API self-protecting against malformed or unexpected input formats.
+This means the resource method body is never executed - no partial parsing, no null entity objects, no risk of data corruption. The annotation acts as a first-line contract enforcement at the framework level, making the API self-protecting against malformed or unexpected input formats.
 
 ---
 
@@ -468,7 +468,7 @@ This means the resource method body is never executed — no partial parsing, no
 Using a query parameter (**GET /api/v1/sensors?type=CO2**) is superior to embedding the filter in the path (**/api/v1/sensors/type/CO2**) for the following reasons:
 
 - **Semantic correctness:** Path segments identify a specific resource. **sensors/CO2** implies CO2 is a distinct resource, not a filter criterion applied to the sensors collection. Query parameters semantically represent optional modifiers on a collection.
-- **Multiple filters:** Query parameters compose naturally — **?type=CO2&status=ACTIVE** is intuitive. Path-based filtering with multiple criteria leads to combinatorial URL designs that are unmaintainable.
+- **Multiple filters:** Query parameters compose naturally - **?type=CO2&status=ACTIVE** is intuitive. Path-based filtering with multiple criteria leads to combinatorial URL designs that are unmaintainable.
 - **Cacheability and bookmarking:** Query parameter URLs are understood by HTTP caches and browsers as referring to the same base resource with optional refinements.
 - **Optional by nature:** Query parameters are inherently optional; omitting them returns the full unfiltered collection. A path-based approach would require a separate route for the unfiltered case.
 
@@ -497,7 +497,7 @@ Key benefits:
 When a client POSTs a new sensor with a **roomId** of **"room-101"** and that room does not exist:
 
 - **404 Not Found** is semantically wrong in this context. 404 means the requested URL itself does not exist. The URL **/api/v1/sensors** exists and is valid; the request was received and understood.
-- **422 Unprocessable Entity** is more accurate because the HTTP request was syntactically valid (well-formed JSON, correct Content-Type), reached the correct endpoint, but the server cannot process it because the semantic content is invalid — specifically, it contains a reference to a resource that does not exist in the system.
+- **422 Unprocessable Entity** is more accurate because the HTTP request was syntactically valid (well-formed JSON, correct Content-Type), reached the correct endpoint, but the server cannot process it because the semantic content is invalid - specifically, it contains a reference to a resource that does not exist in the system.
 
 422 communicates to the client: "I understood your request perfectly, but the data inside it violates a business rule." This helps client developers distinguish between "wrong URL" (404) and "valid request with bad data" (422), enabling them to write more precise error-handling logic.
 
